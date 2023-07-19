@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+</head>
+<body>
+<div  class="container text">
+    <div>
+        <div class="container">
+            <a th:if="${usuario.imagen != null}" class="d-flex align-items-center">
+                <img class="logo" th:src="@{/imagen/perfil/__${usuario.id}__}">
+            </a>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+            <p type="text" class="form-control" id="exampleFormControlInput1" name="nombre" th:text="${usuario.nombre}"></p>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Direccion de Email</label>
+            <p type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" th:text="${usuario.email}"></p>
+        </div>
+
+    </div>
+    <div class="container text-center" th:if="${usuario.rol == PERIODISTA}">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Direccion de Email</label>
+            <p type="integer" class="form-control" id="exampleInputsueldo" aria-describedby="emailHelp" name="email" th:text="${usuario.sueldoMensual}"></p>
+        </div>
+        <h1>NOTICIAS DEL PERIODISTA</h1>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col" th:each=" noticia : ${noticias}">
+                <div class="card text-center mb-3" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${noticia.titulo}">titulo noticia</h5>
+                        <a th:href="@{noticia/__${noticia.id}__}" class="btn btn-primary">Ver</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <symbol id="check-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+            </symbol>
+        </svg>
+
+        <div th:if="${exito != null}" class="alert alert-success d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+            <div>
+                <p th:text="${exito}"></p>
+            </div>
+        </div>
+        <div>
+            <a th:href="@{/}" class="btn btn-primary">Volver</a>
+            <a th:href="@{usuario/modificar/__${usuario.id}__}" class="btn btn-primary">Modificar</a>
+            <a class="btn btn-primary" type="button" th:href="@{/noticia/registrar}">Crear nueva noticia</a>
+            <a th:href="@{noticia/eliminar/__${usuario.id}__}" th:if="${usuario.rol == USER}" class="btn btn-primary">Dar permisos de periodista</a>
+            <a th:href="@{noticia/eliminar/__${usuario.id}__}" th:if="${usuario.rol == PERIODISTA}"class="btn btn-primary">Sacar permisos de periodista</a>
+            <a th:href="@{noticia/eliminar/__${usuario.id}__}" class="btn btn-primary">Dar de baja</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>

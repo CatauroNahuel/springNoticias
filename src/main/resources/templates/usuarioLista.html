@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body>
+
+
+<div class="container text">
+
+    <div class="header">
+        <div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a class="btn btn-primary" type="button" >Usuarios y periodistas</a>
+                <a class="btn btn-primary" type="button" th:href="@{/noticia/registrar}">Crear nueva noticia</a>
+                <a class="btn btn-primary" type="button">Modificar mis datos</a>
+                <a class="btn btn-primary me-md-2" type="button">Cerrar sesion</a>
+            </div>
+        </div>
+    </div>
+    <div class="container text-center">
+        <h1>USUARIOS</h1>
+        <table class="table table-dark table-hover">
+            <thead>
+            <tr >
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">rol</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each=" usuario : ${usuarios}">
+                <th scope="row"></th>
+                <td th:text="${usuario.nombreUsuario}"></td>
+                <td th:text="${usuario.email}"></td>
+                <td th:text="${usuario.rol}"></td>
+                <td><a class="btn btn-outline-primary btn-sm" type="button" th:href="@{/noticia/registrar}">ver</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>
